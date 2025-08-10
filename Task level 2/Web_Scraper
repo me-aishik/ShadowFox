@@ -1,0 +1,20 @@
+import scrapy
+
+class ShadowfoxSpider(scrapy.Spider):
+    name = "shadowfox"
+    start_urls = ["https://shadowfox.in/"]
+
+    def parse(self, response):
+        try:
+            # Extract headings with error handling
+            for heading in response.css("h2::text"):
+                text = heading.get().strip()
+                if text:  # Only yield non-empty headings
+                    yield {"heading": text}
+
+            # Extract and normalize links
+            for link in response.css("a::attr(href)"):
+                url = response.urljoin(link.get())  # Handle relative URLs
+                yield {"link": url}
+        except Exception as e:
+            self.logger.error(f"Error parsing response: {e}")
