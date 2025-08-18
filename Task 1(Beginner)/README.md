@@ -1,4 +1,4 @@
-# Python Beginner Tasks 🐍
+# Python Beginner Tasks 
 
 A collection of beginner-friendly Python programming exercises covering fundamental concepts.
 
